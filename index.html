@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MADESH A | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { text-shadow: 2px 2px #ff0000, -2px -2px #00ff00; }
+            100% { text-shadow: -2px -2px #ff0000, 2px 2px #00ff00; }
+        }
+
+        .glitch {
+            font-size: 3rem;
+            font-weight: bold;
+            animation: glitch 1.5s infinite alternate;
+        }
+
+        /* Typing Effect */
+        .typing {
+            display: inline-block;
+            border-right: 2px solid #00e6e6;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(12, end) forwards;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* FAQ */
+        .faq-question {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            background: #00e6e6;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #009999;
+            transform: scale(1.02);
+            box-shadow: 0 0 15px #00e6e6;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 15px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #00e6e6;
+            transition: max-height 0.5s ease-out, opacity 0.4s ease-in-out;
+            opacity: 0;
+        }
+
+        /* Certification Gallery */
+        #certGallery img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00e6e6;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #certGallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Buttons */
+        .button {
+            padding: 10px 20px;
+            background-color: #00e6e6;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            display: inline-block;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            background-color: #009999;
+            box-shadow: 0 0 20px #00e6e6;
+        }
+    </style>
+</head>
+<body>
+    <audio id="clickSound" src="click.mp3"></audio>
+
+    <header>
+        <h1 class="glitch"><span class="typing">MADESH A</span></h1>
+        <p class="subtitle">Aspiring Software Developer</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2 class="glitch">About Me</h2>
+        <div class="faq">
+            <button class="faq-question">Who are you?</button>
+            <p class="faq-answer">I am A. Madesh, a second-year BCA student at DRBCCC Hindu College.</p>
+
+            <button class="faq-question">What are your key skills?</button>
+            <p class="faq-answer">I have skills in Java, HTML, C++, Python, and data structures.</p>
+
+            <button class="faq-question">What are your career goals?</button>
+            <p class="faq-answer">I aim to excel in software development and game development while continuing to grow my business.</p>
+        </div>
+    </section>
+
+    <section id="certifications">
+        <h2 class="glitch">Certifications</h2>
+        <input type="file" id="certUpload" accept="image/*">
+        <button onclick="uploadCert()">Upload Certification</button>
+        <div id="certGallery"></div>
+    </section>
+
+    <section id="resume">
+        <h2 class="glitch">Resume</h2>
+        <a href="Madesh_resume.pdf" class="button">Download Resume</a>
+    </section>
+
+    <section id="contact">
+        <h2 class="glitch">Contact</h2>
+        <p>📞 9043782325</p>
+        <p>🔗 <a href="https://www.linkedin.com/in/madesh-a-5775a02a9" target="_blank">LinkedIn: MADESH A</a></p>
+        <p>🔗 <a href="https://github.com/MadeshAchari" target="_blank">GitHub: MadeshAchari</a></p>
+    </section>
+
+    <footer>
+        <p>© 2025 MADESH A | Digital Portfolio</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const questions = document.querySelectorAll(".faq-question");
+            const soundEffect = new Audio("click.mp3");
+
+            questions.forEach((question) => {
+                question.addEventListener("click", function() {
+                    soundEffect.currentTime = 0;  
+                    soundEffect.play();
+
+                    const answer = this.nextElementSibling;
+
+                    document.querySelectorAll(".faq-answer").forEach((ans) => {
+                        if (ans !== answer) {
+                            ans.style.maxHeight = "0px";
+                            ans.style.opacity = "0";
+                        }
+                    });
+
+                    if (answer.style.maxHeight === "0px" || !answer.style.maxHeight) {
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                        answer.style.opacity = "1";
+                    } else {
+                        answer.style.maxHeight = "0px";
+                        answer.style.opacity = "0";
+                    }
+                });
+            });
+        });
+
+        function uploadCert() {
+            const input = document.getElementById("certUpload");
+            const gallery = document.getElementById("certGallery");
+
+            if (input.files && input.files[0]) {
+                let img = document.createElement("img");
+                img.src = URL.createObjectURL(input.files[0]);
+                gallery.appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
